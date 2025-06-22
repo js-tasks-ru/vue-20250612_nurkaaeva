@@ -20,7 +20,7 @@ const App = defineComponent({
   },
 
   template: `
-    <time :datetime="formatAsIsoDate(new Date)"> Сегодня {{ formatAsLocalDate(new Date) }}</time>
+    <time :datetime="formatAsIsoDate(new Date)"> Сегодня test {{ formatAsLocalDate(new Date) }} </time>
   `,
 })
 
