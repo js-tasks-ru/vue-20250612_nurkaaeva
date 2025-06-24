@@ -18,16 +18,7 @@ export default defineComponent({
     }
 
     function isNight(currentTime, sunrise, sunset){
-      const toMinutes = (time) => {
-        const [hours, minutes] = time.split(":").map(Number);
-        return hours * 60 + minutes;
-      };
-
-      const current = toMinutes(currentTime);
-      const rise = toMinutes(sunrise);
-      const set = toMinutes(sunset);
-
-      return current < rise || current > set;
+      return currentTime < sunrise || currentTime > sunset;
     }
 
     return {
@@ -43,8 +34,8 @@ export default defineComponent({
     <div>
       <h1 class="title">Погода в Средиземье</h1>
 
-      <ul  class="weather-list unstyled-list">
-        <li v-for="weather in weatherData" :key="weather.geographic_name" class="weather-card" :class="isNight(weather.current.dt, weather.current.sunrise, weather.current.sunset) ? 'weather-card--night' : '' ">
+      <ul  class="weather-list">
+        <li v-for="weather in weatherData" :key="weather.geographic_name" class="weather-card" :class="{'weather-card--night': isNight(weather.current.dt, weather.current.sunrise, weather.current.sunset)}">
           <div v-if="weather.alert" class="weather-alert">
             <span class="weather-alert__icon">⚠️</span>
             <span class="weather-alert__description">{{ weather.alert.sender_name }}: {{ weather.alert.description }}</span>
