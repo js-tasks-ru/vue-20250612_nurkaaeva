@@ -15,10 +15,13 @@ export default defineComponent({
     },
   },
 
+
+  emits: ['delete'],
+
   template: `
     <li :class="{ marked }">
       {{ email }}
-      <button type="button" aria-label="Удалить" @click.stop>❌</button>
+      <button type="button" aria-label="Удалить" @click.stop="$emit('delete')">❌</button>
     </li>
   `,
 })
